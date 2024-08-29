@@ -9,6 +9,17 @@ with connect(
     database='pet_project',
 ) as connection:
     
+# creation pet_project database
+    create_pet_project_db = '''
+    create database pet_project character set utf8
+    '''
+
+# using pet_project database
+    use_pet_project_db = '''
+    use pet_project
+    '''
+
+# creation tables
     create_table_main = '''
     create table main (
         main_id tinyint unsigned not null auto_increment,
@@ -21,7 +32,7 @@ with connect(
     create table branch (
         branch_id tinyint unsigned not null auto_increment,
         main_id tinyint unsigned not null,
-        country varchar(10),
+        country tinytext,
         city varchar(20),
         constraint fk_branch_main foreign key (main_id) 
         references main (main_id) on delete cascade on update restrict,
@@ -29,8 +40,69 @@ with connect(
     )
     '''
 
-    # tables creation
+    create_table_departments = '''
+    create table departments (
+        dept_id tinyint unsigned not null auto_increment,
+        main_id tinyint unsigned not null,
+        department tinytext,
+        constraint fk_departments_main foreign key (main_id)
+        references main (main_id) on delete cascade on update restrict,
+        constraint pk_departments primary key (dept_id)
+    )
+    '''
+
+    create_table_staff = '''
+    create table staff (
+        staff_id tinyint unsigned not null auto_increment,
+        dept_id tinyint unsigned not null,
+        main_id tinyint unsigned not null,
+        f_name tinytext,
+        l_name tinytext,
+        phone varchar(30),
+        email varchar(50),
+        responsibility varchar(100) not null,
+        leader_id tinyint unsigned,
+        branch_id tinyint unsigned not null,
+        constraint fk_staff_departments foreign key (dept_id)
+        references departments (dept_id) on delete cascade on update restrict,
+        constraint fk_staff_main foreign key (main_id)
+        references main (main_id),
+        constraint fk_staff_staff foreign key (leader_id)
+        references staff (staff_id),
+        constraint fk_staff_branch foreign key (branch_id)
+        references branch (branch_id) on delete cascade on update restrict,
+        constraint pk_staff primary key (staff_id)
+    )
+    '''
+
+    create_table_customers = '''
+    create table customers (
+        customer_id tinyint unsigned not null auto_increment,
+        staff_id tinyint unsigned not null,
+        main_id tinyint unsigned not null,
+        customer_name varchar(50) not null,
+        city varchar(20),
+        street varchar(30),
+        building varchar(10),
+        contact_person tinytext,
+        contact_phone varchar(30),
+        work_start varchar(5),
+        work_end varchar(5),
+        constraint fk_customers_staff foreign key (staff_id)
+        references staff (staff_id),
+        constraint fk_customers_main foreign key (main_id)
+        references main (main_id),
+        constraint pk_customers primary key (customer_id)
+    )
+    '''
+
+# execution sql scripts
     with connection.cursor() as cursor:
+        cursor.execute(create_pet_project_db)
+        cursor.execute(use_pet_project_db)
         cursor.execute(create_table_main)
         cursor.execute(create_table_branch)
+        cursor.execute(create_table_departments)
+        cursor.execute(create_table_staff)
+        cursor.execute(create_table_customers)
         # print(cursor.fetchall())

@@ -1,10 +1,12 @@
-/* begin database pet_project creation */
+/* database pet_project  creation*/
 
 create database pet_project character set utf8;
 
-/* end database pet_project creation */
+/* begin to use database pet_project */
 
-/* begin table creation */
+use pet_project database
+
+/* begin tables creation */
 
 create table main
  (main_id tinyint unsigned not null auto_increment,
@@ -12,27 +14,20 @@ create table main
   constraint pk_main primary key (main_id)
  );
 
-create table departments
- (dept_id tinyint unsigned not null auto_increment,
-  main_id tinyint unsigned not null,
-  department varchar(20),
-  constraint fk_departments_main foreign key (main_id) 
-  references main (main_id) on delete cascade on update restrict,
-  constraint pk_departments primary key (dept_id)
- );
-
 create table branch
  (branch_id tinyint unsigned not null auto_increment,
-  country varchar(10),
+  country tinitext,
   city varchar(30),
   constraint pk_branch primary key (branch_id)
  );
 
-create table joint_work
- (company_id tinyint unsigned not null auto_increment,
-  company_name varchar(30),
-  responsibility varchar(30),
-  constraint pk_company primary key (company_id)
+create table departments
+ (dept_id tinyint unsigned not null auto_increment,
+  main_id tinyint unsigned not null,
+  department tinytext,
+  constraint fk_departments_main foreign key (main_id) 
+  references main (main_id) on delete cascade on update restrict,
+  constraint pk_departments primary key (dept_id)
  );
 
 create table staff

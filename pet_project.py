@@ -11,5 +11,5 @@ provider_contacts_df = pd.read_csv('database/provider_contacts.csv', sep=',', he
 providers_df = pd.read_csv('database/providers.csv', sep=';', header=0)
 staff_df = pd.read_csv('database/staff.csv', sep=';', header=0)
 
-print(customers_df)
-# print(len(max(customers_df.city, key=len)))
+# print(customers_df)
+print(len(max(customers_df.customer_name, key=len)))
