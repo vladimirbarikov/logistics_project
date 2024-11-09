@@ -1,1 +1,4 @@
-wh_id,wh_name,country,zip,city,street,building,staff_id,customer_id,provider_id
+wh_id;wh_name;country;zip;city;street;building;staff_id;customer_id;provider_id
+1;ТК «БАЙКАЛ СЕРВИС»;Россия;;г. Новосибирск;Богдана Хмельницкого;93;;;
+2;ТК «БАЙКАЛ СЕРВИС»;Россия;;г. Верхняя Пышма;Обогатителей;11;;;
+3;ТД «ФЕНИКС»;Россия;;х. Нижнетемерницкий;Гайдара;6;;;
