@@ -21,7 +21,7 @@ moving_around_warehouses_df = pd.read_csv('database/moving_around_warehouses.csv
 # assortment_df = assortment_df.rename(columns={'name_rus':'description'})
 # customer_contacts_df.insert(5,'email', ['', '', '', '', '', '', '', '', '', '', '', '', '', '', ''], False)
 # branch_df[['zip', 'street', 'building']] = ''
-print(shipment_from_china_df)
+# print(shipment_from_china_df)
 # shipment_from_china_df.to_csv('database/shipment_from_china.csv', index=False)
 # print(len(max(shipment_df.gtd, key=len)))
 # print(assortment_df.columns.to_list())

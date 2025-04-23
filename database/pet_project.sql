@@ -1,10 +1,10 @@
-/* database pet_project  creation*/
+/* database pet_project creation*/
 
 create database pet_project character set utf8;
 
 /* begin to use database pet_project */
 
-use pet_project database
+use pet_project database;
 
 /* begin tables creation */
 
@@ -255,7 +255,7 @@ create table moving_around_warehouses (
 /* begin data population */
 
 /* branch data */
-load data local infile '/Users/vladimirbarikov/github/pet_project_rep/database/branch.csv'
+load data local infile './branch.csv'
  into table branch
  fields terminated by ';' 
  lines terminated by '\n' 
@@ -263,7 +263,7 @@ load data local infile '/Users/vladimirbarikov/github/pet_project_rep/database/b
  (branch_id, country, city);
 
 /* departments data */
-load data local infile '/Users/vladimirbarikov/github/pet_project_rep/database/departments.csv'
+load data local infile './departments.csv'
  into table departments 
  fields terminated by ';' 
  lines terminated by '\n' 
@@ -271,7 +271,7 @@ load data local infile '/Users/vladimirbarikov/github/pet_project_rep/database/d
  (dept_id, main_id, department);
 
 /* staff data */
-load data local infile '/Users/vladimirbarikov/github/pet_project_rep/database/staff.csv'
+load data local infile './staff.csv'
  into table staff
  fields terminated by ';' 
  lines terminated by '\n' 
@@ -284,7 +284,7 @@ load data local infile '/Users/vladimirbarikov/github/pet_project_rep/database/s
      leader_id = if(@leader_id='', null, @leader_id);
 
 /* customers data */
-load data local infile '/Users/vladimirbarikov/github/pet_project_rep/database/customers.csv'
+load data local infile './customers.csv'
  into table customers
  fields terminated by ';'
  lines terminated by '\n'
