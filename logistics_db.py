@@ -12,19 +12,19 @@ cnx = mysql.connector.connect(user=input('User:'),
 
 cursor = cnx.cursor(buffered=True)
             
-# creation pet_project database
-create_pet_project_db = '''
-create database pet_project character set utf8
+# creation logistics database
+create_logistics_db = '''
+create database if not exists logistics_db character set utf8
 '''
 
-# using pet_project database
-use_pet_project_db = '''
-use pet_project
+# use logistics database
+use_logistics_db = '''
+use logistics_db
 '''
 
 # creation tables
 create_table_branch = '''
-create table branch (
+create table if not exists branch (
     branch_id smallint unsigned not null auto_increment,
     country varchar(20) not null,
     zip varchar(20) not null,
@@ -36,7 +36,7 @@ create table branch (
 '''
 
 create_table_departments = '''
-create table departments (
+create table if not exists departments (
     dept_id smallint unsigned not null auto_increment,
     department varchar(30),
     constraint pk_departments primary key (dept_id)
@@ -44,7 +44,7 @@ create table departments (
 '''
 
 create_table_staff = '''
-create table staff (
+create table if not exists staff (
     staff_id smallint unsigned not null auto_increment,
     f_name varchar(20),
     l_name varchar(20),
@@ -66,7 +66,7 @@ create table staff (
 '''
 
 create_table_customers = '''
-create table customers (
+create table if not exists customers (
     customer_id smallint unsigned not null auto_increment,
     customer_name varchar(50) not null,
     country varchar(20) not null,
@@ -84,7 +84,7 @@ create table customers (
 '''
 
 create_table_customer_contacts = '''
-create table customer_contacts (
+create table if not exists customer_contacts (
     contact_id smallint unsigned not null auto_increment,
     f_name varchar(20) not null,
     l_name varchar(20),
@@ -100,7 +100,7 @@ create table customer_contacts (
 '''
 
 create_table_providers = '''
-create table providers (
+create table if not exists providers (
     provider_id smallint unsigned not null auto_increment,
     provider_name varchar(50) not null,
     country varchar(20) not null,
@@ -114,7 +114,7 @@ create table providers (
 '''
 
 create_table_provider_contacts = '''
-create table provider_contacts (
+create table if not exists provider_contacts (
     contact_id smallint unsigned not null auto_increment,
     f_name varchar(20) not null,
     l_name varchar(20),
@@ -133,7 +133,7 @@ create table provider_contacts (
 '''
 
 create_table_products = '''
-create table products (
+create table if not exists products (
     product_id smallint unsigned not null auto_increment,
     product varchar(10) not null,
     description varchar(50) not null,
@@ -142,7 +142,7 @@ create table products (
 '''
 
 create_table_labeling = '''
-create table labeling (
+create table if not exists labeling (
     labeling_id smallint unsigned not null auto_increment,
     packaging_lbl_drawing varchar(20),
     item_lbl_drawing varchar(20),
@@ -156,7 +156,7 @@ create table labeling (
 '''
 
 create_table_packaging = '''
-create table packaging (
+create table if not exists packaging (
     packaging_id smallint unsigned not null auto_increment,
     packaging_drawing varchar(20) not null,
     length_m float(5, 2) unsigned,
@@ -173,7 +173,7 @@ create table packaging (
 '''
 
 create_table_assortment = '''
-create table assortment (
+create table if not exists assortment (
     item_id smallint unsigned not null auto_increment,
     factory_code varchar(30) not null,
     item_model varchar(10),
@@ -196,7 +196,7 @@ create table assortment (
 '''
 
 create_table_shipment_from_china = '''
-create table shipment_from_china (
+create table if not exists shipment_from_china (
     shipment_id smallint unsigned not null auto_increment,
     container_num_short varchar(10) not null,
     container_num_long varchar(11) not null,
@@ -217,7 +217,7 @@ create table shipment_from_china (
 '''
 
 create_table_warehouses = '''
-create table warehouses (
+create table if not exists warehouses (
     wh_id smallint unsigned not null auto_increment,
     wh_name varchar(50) not null,
     country varchar(20) not null,
@@ -239,7 +239,7 @@ create table warehouses (
 '''
 
 create_table_transport = '''
-create table transport (
+create table if not exists transport (
     transport_id smallint unsigned not null auto_increment,
     transport_model varchar(15) not null,
     load_capacity smallint unsigned not null,
@@ -249,7 +249,7 @@ create table transport (
 '''
 
 create_table_delivery_to_customers = '''
-create table delivery_to_customers (
+create table if not exists delivery_to_customers (
     delivery_id smallint unsigned not null auto_increment,
     item_quantity int unsigned not null,
     gtd varchar(23),
@@ -272,7 +272,7 @@ create table delivery_to_customers (
 '''
 
 create_table_moving_around_warehouses = '''
-create table moving_around_warehouses (
+create table if not exists moving_around_warehouses (
     moving_id smallint unsigned not null auto_increment,
     item_quantity int unsigned not null,
     gtd varchar(23),
@@ -296,21 +296,20 @@ create table moving_around_warehouses (
     constraint pk_moving_around_warehouses primary key (moving_id)
 )
 '''
-set_global_local_infile ='''
-set global local_infile='on'
-'''
-branch_data = '''
-load data local infile './branch.csv'
-into table branch
-fields terminated by ';' 
-lines terminated by '\n' 
-ignore 1 rows
-(branch_id, country, city);
-'''
+
+# # uploading branch data
+# branch_data = '''
+# load data local infile './branch.csv'
+# into table branch
+# fields terminated by ';' 
+# lines terminated by '\n' 
+# ignore 1 rows
+# (branch_id, country, city);
+# '''
 
 # execution sql scripts
-cursor.execute(create_pet_project_db)
-cursor.execute(use_pet_project_db)
+cursor.execute(create_logistics_db)
+cursor.execute(use_logistics_db)
 cursor.execute(create_table_branch)
 cursor.execute(create_table_departments)
 cursor.execute(create_table_staff)
