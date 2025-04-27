@@ -1,2 +1,2 @@
-# pet_project_rep
-database pet_project
+# logistics_project_rep
+database logistics_db
