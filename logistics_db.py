@@ -3,7 +3,6 @@ import mysql.connector
 import warnings
 warnings.filterwarnings('ignore')
 
-# connection establishing
 # connection establishment
 cnx = mysql.connector.connect(user=input('User:'),
                               password=getpass('Password:'),
